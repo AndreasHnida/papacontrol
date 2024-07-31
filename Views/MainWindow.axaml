@@ -18,7 +18,9 @@
       <!-- Title Bar -->
       <StackPanel Grid.Row="0" Orientation="Vertical">
         <Grid Background="White" Height="40" ColumnDefinitions="Auto, Auto, *, Auto, Auto">
-          <Rectangle Grid.Column="0" Fill="White" Width="40"></Rectangle>
+          <Grid Grid.Column="0" Margin="5 0">
+            <Image  Source="/Assets/cap.png"/>
+          </Grid>          
           <Rectangle Grid.Column="1" Fill="White" Width="40"></Rectangle>
           <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label HorizontalAlignment="Center"  FontWeight="Black">PAPA CONTROL</Label>
@@ -31,7 +33,6 @@
       <!-- Content -->
       <Grid Grid.Row="1" ColumnDefinitions="2*, *">
         <Grid Grid.Column="0" Margin="30 30">
-          <Image MaxWidth="600" Source="/Assets/cap.png"/>
         </Grid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="15 5">
           <StackPanel Orientation="Horizontal" Height="40">

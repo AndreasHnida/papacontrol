@@ -26,7 +26,7 @@ namespace PapaControlApp.ViewModels
         private long _totalElapsedSeconds;
         private string _elapsedTime;
         private string _remainingTime;
-        private string _allowedTime = "1h";
+        private string _allowedTime = "5h";
 
         private bool _isInputEnabled = false;
 
@@ -135,8 +135,12 @@ namespace PapaControlApp.ViewModels
             try
             {
                 var data = $"{_allowedTime}|{_totalElapsedSeconds}";
+                Debug.WriteLine("Data: " + data);
                 var encryptedData = EncryptString(data, _encryptionKey);
                 File.WriteAllBytes(SettingsFilePath, encryptedData);
+                // Debug.WriteLine($"Saved Settings to: {Path.GetFullPath(SettingsFilePath)}");
+                // Debug.WriteLine("AllowedTime: " + _allowedTime);
+                // Debug.WriteLine("ElapsedSeconds: " + _totalElapsedSeconds); 
             }
             catch (Exception ex)
             {
@@ -149,14 +153,19 @@ namespace PapaControlApp.ViewModels
             try
             {
                 if (File.Exists(SettingsFilePath))
-                {
+                { 
+                    Debug.WriteLine($"Reading settings from: {Path.GetFullPath(SettingsFilePath)}");
                     var encryptedData = File.ReadAllBytes(SettingsFilePath);
                     var data = DecryptString(encryptedData, _encryptionKey);
                     var parts = data.Split('|');
                     if (parts.Length >= 2)
                     {
                         _allowedTime = parts[0];
+                        Debug.WriteLine($"AllowedTime: {parts[0]}");
                         _totalElapsedSeconds = long.Parse(parts[1]);
+                        Debug.WriteLine($"Successfully read from settings file");
+                        Debug.WriteLine("AllowedTime: " + _allowedTime);
+                        Debug.WriteLine("ElapsedSeconds: " + _totalElapsedSeconds);
                     }
                 }
             }

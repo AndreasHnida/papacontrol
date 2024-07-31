@@ -25,21 +25,8 @@ public partial class MainWindow : Window
 
     private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
     {
-        e.Cancel = true;
-        this.Hide();
-    }
-
-    private async void DialogButton_Click(object? sender, RoutedEventArgs args)
-    {
-        SingleActionDialog dialog = new()
-        {
-            Message = "Hello from C# code! Do you want to see a snackbar?",
-            ButtonText = "Click me!"
-        };
-        if ((await dialog.ShowAsync()).HasValue)
-        {
-            Snackbar.Show("I'm a snackbar!", TimeSpan.FromSeconds(2), "I Know");
-        }
+        // e.Cancel = true;
+        // this.Hide();
     }
 
     private void ToggleInput(object? sender, RoutedEventArgs args)
