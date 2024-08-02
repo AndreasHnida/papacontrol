@@ -27,7 +27,9 @@ namespace PapaControlApp.ViewModels
         private string _elapsedTime;
         private string _remainingTime;
         private string _allowedTime = "5h";
-
+        private DateTime _today = DateTime.Today;
+        private DateTime _yesterday = DateTime.Today.AddDays(-1);
+        private DateTime _timeStamp = DateTime.Today;
         private bool _isInputEnabled = false;
 
         public void ToggleInput()
@@ -36,7 +38,7 @@ namespace PapaControlApp.ViewModels
         }
         public MainWindowViewModel()
         {
-            LoadSettings();
+            LoadSettingsAndCheckForANewDay();
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
 
@@ -134,7 +136,7 @@ namespace PapaControlApp.ViewModels
         {
             try
             {
-                var data = $"{_allowedTime}|{_totalElapsedSeconds}";
+                var data = $"{_allowedTime}|{_totalElapsedSeconds}|{_today}";
                 Debug.WriteLine("Data: " + data);
                 var encryptedData = EncryptString(data, _encryptionKey);
                 File.WriteAllBytes(SettingsFilePath, encryptedData);
@@ -148,7 +150,7 @@ namespace PapaControlApp.ViewModels
             }
         }
 
-        private void LoadSettings()
+        private void LoadSettingsAndCheckForANewDay()
         {
             try
             {
@@ -163,9 +165,15 @@ namespace PapaControlApp.ViewModels
                         _allowedTime = parts[0];
                         Debug.WriteLine($"AllowedTime: {parts[0]}");
                         _totalElapsedSeconds = long.Parse(parts[1]);
+                        _timeStamp = DateTime.Parse(parts[2]);
+                        if(_timeStamp != _today)
+                        {
+                            _totalElapsedSeconds = 0;
+                        }
                         Debug.WriteLine($"Successfully read from settings file");
                         Debug.WriteLine("AllowedTime: " + _allowedTime);
                         Debug.WriteLine("ElapsedSeconds: " + _totalElapsedSeconds);
+                        Debug.WriteLine("TimeStamp: " + _timeStamp);
                     }
                 }
             }

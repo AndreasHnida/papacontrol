@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PapaControlApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7daf10c19805e96e64b754b0251ee6aaccfa7ae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d1117fb51faf25efd6b5ddbe5674ed091246f20")]
 [assembly: System.Reflection.AssemblyProductAttribute("PapaControlApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PapaControlApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
